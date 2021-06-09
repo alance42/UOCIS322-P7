@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Submission!</title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <table style="width:50%">
+                    <tr>
+                        <th>Brevet Distance</th>
+                        <th>Start Date</th>
+                    <tr>
+                    <tr>
+                        <th>{{ rows[0].brevetDist }}</th>
+                        <th>{{ rows[0].startDate }} </th>
+                    <tr>
+                </table> 
+                <br><br>
+                 <table style="width:50%">
+                   <tr>
+                    <th>index</th>
+                    <th>km</th>
+                    <th>miles</th>
+                    <th>Begin Date</th>
+                    <th>Close Date</th>
+                  </tr> 
+                {% for row in rows %}
+                  <tr>
+                    <th>{{ row.index }}</th>
+                    <th>{{ row.km }}</th>
+                    <th>{{ row.miles }}</th>
+                    <th>{{ row.startTime }}</th>
+                    <th>{{ row.closeTime }}</th>
+                  </tr>
+                {% endfor %}
+                </table> 
+            </div>
+        </div>
+    </body>
+</html>

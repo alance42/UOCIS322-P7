@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<h1>Sign In</h1>
+</div>
+<div class="row">
+	<form method="post" novalidate>
+		{{ form.hidden_tag() }}
+		<div class="col-4">
+			<div class="form-group">
+				<label class="form-check-label" for="usernameBox">{{ form.username.label }}</label>
+				{{ form.username(size=32, class="form-control", id="usernameBox") }}
+				{{ form.password(size=32, class="form-control", id="passwordBox") }}
+				{% if form.username.errors %}
+				<ul class="errors">
+					{% for error in form.username.errors %}
+					<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+			</div>
+			<div class="input-group mb-4">
+				<button class="btn btn-outline-primary" id="button-login">Login</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

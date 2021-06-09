@@ -1,0 +1,32 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+	<title>ACP Brevet Calculator Database Interaction</title>
+ </head>
+ <body>
+	<h3>ACP Brevet Calculator Database Interaction</h1>
+	<form action="/listdata">
+
+			<strong>Data returned</strong><br>
+			<input type="radio" id="listAll" name = "returnType" value="listAll" required="true">
+			<label for="listAll">Both</label>
+			<input type="radio" id="listOpenOnly" name="returnType" value="listOpenOnly">
+			<label for="listOpenOnly">Open</label>
+			<input type="radio" id="listCloseOnly" name="returnType" value="listCloseOnly">
+			<label for="listCloseOnly">Close</label><br><br>
+
+			<strong>Format returned</strong><br>
+			<input type="radio" id="csv" name = "dataType" value="csv">
+			<label for="csv">CSV</label>
+			<input type="radio" id="JSON" name="dataType" value="JSON">
+			<label for="JSON">JSON</label><br><br>
+
+			<strong>Number of return values</strong><br>
+			<input type="number" id="quantity" name="quantity" min="1">
+
+			<button type="submit" id="request">Make Request</button>
+	</form>
+
+
+ </body>
+ </html>
