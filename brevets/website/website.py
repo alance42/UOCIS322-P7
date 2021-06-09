@@ -115,6 +115,7 @@ def login():
     if form.validate_on_submit() and request.method == "POST" and "username" and "password" in request.form:
         username = request.form["username"]
         password = request.form["password"]
+        hashedPass = pwd_context.encrypt(password)
         r = requests.get(f'http://restapi:5000/register/?user={username}&hashedPass={hashedPass}')
 
         if #r success:
