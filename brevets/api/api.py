@@ -9,6 +9,7 @@ api = Api(app)
 
 client = MongoClient('mongodb://' + os.environ['MONGODB_HOSTNAME'], 27017)
 db = client.brevetsdb
+passdb = client.passwords
 	
 def convertToCSV(data):
 	if len(data) < 1:
@@ -65,11 +66,37 @@ class listCloseOnly(Resource):
 			data = loads(dumps(data))
 		return data
 
+class register(Resource):
+	def get(self):
+		username = request.args.get('user', type=str)
+		password = request.args.get('hashedPass', type=str)
+		doubleHash = pwd_context.encrypt(password)
+
+		uniqueID = passdb.find().count()
+		passdb.insertone("id": uniqueID, "username": username, "password": password)
+
+		return #json stuff
+
+class login(Resource):
+	def get(self):
+		username = request.args.get('user', type=str)
+		checkPass = request.args.get('hashedPass', type=str)
+		doubleHash = pwd_context.encrypt(password)
+
+		user = passdb.find({"username": username})
+
+		if pwd_context.verify(checkPass, user[password]):
+
+
+		return #json stuff
+
 # Create routes
 # Another way, without decorators
 api.add_resource(listAll, '/listAll', '/listAll/', '/listAll/<string:type>')
 api.add_resource(listOpenOnly, '/listOpenOnly', '/listOpenOnly/', '/listOpenOnly/<string:type>')
 api.add_resource(listCloseOnly,'/listCloseOnly', '/listCloseOnly/', '/listCloseOnly/<string:type>')
+api.add_resource(register,'/register')
+api.add_resource(login,'/login')
 
 # Run the application
 if __name__ == '__main__':
