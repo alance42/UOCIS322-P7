@@ -108,7 +108,7 @@ class register(Resource):
 		if passdb.passwords.find_one({"username": username}) == None:
 			uniqueID = passdb.passwords.count_documents({})
 			passdb.passwords.insert_one({"id": uniqueID, "username": username, "password": doubleHash})
-			return {"message": "Success"}, 201
+			return {"id": uniqueID, "username": username}, 201
 
 		return {"message": "Username already in use"}, 400
 
@@ -116,12 +116,13 @@ class token(Resource):
 	def get(self):
 		username = request.args.get('user', type=str)
 		checkPass = request.args.get('hashedPass', type=str)
+		tokenTime = 30
 
 		if passdb.passwords.find_one({"username": username}) != None:
 			user = passdb.passwords.find_one({"username": username})
 			if pwd_context.verify(checkPass, user["password"]):
-				token = generate_auth_token(user["id"], 30)
-				return {"message": "Successful login", "id": user["id"], "token": token.decode('utf-8')}, 201
+				token = generate_auth_token(user["id"], tokenTime)
+				return {"id": user["id"], "token": token.decode('utf-8'), "duration": tokenTime}, 201
 		else:
 			return  {"message": "Failed to login"}, 401
 

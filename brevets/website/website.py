@@ -41,7 +41,7 @@ class LoginForm(Form):
 
 class RegisterForm(Form):
 	username = StringField('Username', [
-		validators.Length(min=2, max=25, message=u"Huh, little too short for a username."),
+		validators.Length(min=2, max=25, message=u"Username must be between two and twenty-five characters."),
 		validators.InputRequired(u"Forget username?")])
 	password = PasswordField('Password', [
 		validators.Length(min=8, message=u"Password must be at least eight characters."),
