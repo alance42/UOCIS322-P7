@@ -101,8 +101,8 @@ def listdata():
 	
 
 
-@app.route("/token", methods=["GET", "POST"])
-def token():
+@app.route("/login", methods=["GET", "POST"])
+def login():
 	form = LoginForm()
 	if form.validate_on_submit() and request.method == "POST" and "username" and "password" in request.form:
 		username = request.form["username"]
