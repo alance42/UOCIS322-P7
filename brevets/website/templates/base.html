@@ -23,7 +23,9 @@
 						<a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Home</a>
 					</li>
 					<li class="nav-item">
+						{% if not current_user.is_authenticated %}
 						<a class="nav-link" aria-current="page" href="{{ url_for('register') }}">Register</a>
+						{% endif %}
 					</li>
 					<li class="nav-item">
 						{% if not current_user.is_authenticated %}
