@@ -138,7 +138,7 @@ def register():
 		username = request.form["username"]
 		password = request.form["password"]
 		hashedPass = pwd_context.using(salt = "Thisisaverylong").hash(password)
-		r = requests.post(f'http://restapi:5000/register/?user={username}&hashedPass={hashedPass}')
+		r = requests.post('http://restapi:5000/register/', {"user":username, "hashedPass": hashedPass})
 
 		if r.status_code == 201:
 			flash("Successfully registered")

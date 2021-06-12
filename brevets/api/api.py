@@ -80,8 +80,8 @@ class listOpenOnly(Resource):
 
 class listCloseOnly(Resource):
 	def get(self, type="JSON"):	
-		num = request.args.get('top', default=-1, type=int)
-		token = request.args.get('token', type=str)
+		num = request.form.get('top', default=-1, type=int)
+		token = request.form.get('token', type=str)
 
 		check, message = verify_auth_token(token)
 		if check:
@@ -101,8 +101,8 @@ class listCloseOnly(Resource):
 
 class register(Resource):
 	def post(self):
-		username = request.args.get('user', type=str)
-		password = request.args.get('hashedPass', type=str)
+		username = request.form.get('user', type=str)
+		password = request.form.get('hashedPass', type=str)
 		doubleHash = pwd_context.using(rounds = 12345, salt = "Thisisaverylong").hash(password)
 
 		if passdb.passwords.find_one({"username": username}) == None:
