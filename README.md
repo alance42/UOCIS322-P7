@@ -6,6 +6,12 @@ Author: Avi Lance
 
 Contact: alance@uoregon.edu
 
+# Running Instructions #
+
+Requirements: Docker Compose
+
+In order to run this application, change into the Brevets directory and run "docker-compose up". Port 1234 on local host is the ACP Brevet Times calculator, port 1235 is accessing the API directly, and port 1236 is a website service that interacts with the API along with registration and login capabilities. 
+
 # User login #
 
 Each user will be required to make an account with a password greater than eight characters. They can then login. If their token signature expires  or they have a bad token signature the service will redirect them to the index page along with the message pertaining to why they were redirected.
